@@ -1,0 +1,19 @@
+# 忽略 Linux/macOS 可执行文件（无后缀名）
+# 通用编译输出文件
+*.out
+*.o
+*.obj
+
+# 忽略 Windows 可执行文件
+*.exe
+*.dll
+*.so
+*.dylib
+
+# 忽略 Go 语言编译出的可执行文件（无后缀）
+# 直接写文件名，例如你的项目叫 demo
+demo
+
+# 忽略 C/C++ 编译输出
+a.out
+core
