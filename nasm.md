@@ -25,4 +25,12 @@ nasm -f elf64 -g -F dwarf hello.asm -o hello.o
 ld hello.o -o hello
 底循环
 
-x86 中所有算术和逻辑指令都会根据结果设置标志位% 
+x86 中所有算术和逻辑指令都会根据结果设置标志位%
+
+一件请你做的事
+你说"我可能会随时会给你反馈一些交叉点"——为了让"嫁接"真正高质量,反馈交叉点时,带一点 context:
+[NASM / 数学 / 工作] - [一句话场景] - [触发了哪个 C 知识点的感想]
+例子(虚构):
+工作 - 在 JNI 里调 native 库,SIGSEGV 但 gdb 显示指针非 NULL -
+让我想到 W2-D3 的 strict aliasing,可能是 Java 那边某个 buffer
+被两种类型解读

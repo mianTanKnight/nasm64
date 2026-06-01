@@ -14,6 +14,8 @@ extern void _x86_64_single_slot_publish_data(volatile long *payload_ptr, volatil
 extern long _x86_64_single_slot_consume_data(volatile long *payload_ptr, volatile long *ready_ptr);
 
 void *publisher_thread(void *rags) {
+  // 不是 UB 因为 因为现在 void* 指向的内存确定是 struct S 结构体
+  // void* 转换成 struct S* 是合法的(需要先确定)
   struct S *s = (struct S *)rags;
   for (long i = 1; i <= 1000000; i++) {
     _x86_64_single_slot_publish_data(&s->payload, &s->ready, i);
@@ -35,6 +37,12 @@ void *consumer_thread(void *rags) {
   printf("All data consumed safely. Last value = %ld\n", last_val);
   return NULL;
 }
+
+// 每一个强制转换为什么合法？
+// 每一个对齐为什么有用？
+// 每一个初始化避免了什么问题？
+// 每一个 fence 到底有没有必要？
+// 程序正确性到底来自 CPU、编译器、ABI、协议，还是 C 语言规则？
 
 int main() {
   struct S s = {0}; // init S , Avoid UB
