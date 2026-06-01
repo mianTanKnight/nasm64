@@ -23,3 +23,6 @@ Caller-saved (调用者保存)：除上面以外的寄存器（如 rax, rdi, rsi
 
 nasm -f elf64 -g -F dwarf hello.asm -o hello.o
 ld hello.o -o hello
+底循环
+
+x86 中所有算术和逻辑指令都会根据结果设置标志位% 
