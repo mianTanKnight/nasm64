@@ -431,3 +431,29 @@ _start:
 ---
 
 _覆盖范围：常用整数/控制流/系统指令。未含 x87 浮点、MMX/SSE/AVX 向量指令集——这些可按需单独成册。_
+
+这是 x86-64 架构规定的 syscall/sysret 协议。
+
+## 硬件定义：
+
+### SYSCALL:
+
+RCX <- return RIP
+R11 <- RFLAGS
+RIP <- IA32_LSTAR
+
+SYSRET:
+RIP <- RCX
+RFLAGS <- R11
+
+所以 rcx 在 syscall 过程中不是普通参数寄存器，而是被硬件占用了。
+
+这也是为什么 Linux x86-64 syscall ABI 里，第 4 个参数不用 rcx，而用 r10。
+
+### 普通 System V 函数调用参数顺序是：
+
+rdi, rsi, rdx, rcx, r8, r9
+
+### 但是 Linux syscall 参数顺序是：
+
+rdi, rsi, rdx, r10, r8, r9
