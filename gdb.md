@@ -121,3 +121,15 @@ TUI 可以在终端中分屏显示源代码、汇编代码和寄存器状态。
 | `backtrace`   | `bt` | 显示当前调用栈（函数调用关系） |
 | `frame <num>` | `f`  | 切换到指定编号的栈帧           |
 | `info locals` | -    | 查看当前栈帧中的局部变量       |
+
+# 查看整个 XMM0 寄存器，按 4 个 float 显示
+
+(gdb) p $xmm0.v4_float
+
+# 查看低 32 位的单个 float
+
+(gdb) p $xmm0.v4_float[0]
+
+# 或者使用 info 命令
+
+(gdb) info registers xmm0
